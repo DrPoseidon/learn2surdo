@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .main {
+    .theory {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      .back {
+        position: absolute;
+        top: 50%;
+        left: -3%;
+        transform: translate(-35%, -50%);
+        z-index: 1;
+      }
+      .forward {
+        position: absolute;
+        top: 50%;
+        right: -3%;
+        transform: translate(35%, -50%);
+        z-index: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.root {
+  .choose {
+    background-color: white;
+    border: 2px solid black;
+    width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    div {
+      background-color: initial;
+      button {
+        margin: 5px;
+      }
+    }
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    h2 {
+      color: white;
+    }
+    .categories {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 5px;
+      .btn {
+        margin-bottom: 5px;
+        width: 50vw;
+      }
+    }
+  }
+}
