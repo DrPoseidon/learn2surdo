@@ -2,7 +2,11 @@
   <div :class="$style.root">
     <L2SHeader />
     <div :class="$style.main">
-      <div v-for="(gesture, index) in gestures" :key="gesture._id">
+      <div
+        v-for="(gesture, index) in gestures"
+        :key="gesture._id"
+        :class="$style.exercise"
+      >
         <L2STestComparisonTask
           v-if="exercises[index] === 'comparison' && curIndex === index"
           :curGestures="getComparisonGestures(gesture)"
