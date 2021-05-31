@@ -6,6 +6,7 @@
     "client": "vue-cli-service serve",
     "server": "nodemon api/app.js",
     "build": "vue-cli-service build",
+    "prod":"vue-cli-service production",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

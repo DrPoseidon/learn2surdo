@@ -2,6 +2,9 @@
   <div :class="$style.root">
     <L2SHeader />
     <L2SProgressBar :percent="getWidth" />
+    <div :class="$style.message" v-if="getWidth === 100">
+      Вы завершили это категорию
+    </div>
     <div :class="$style.main">
       <div v-if="curGestures.length < 3">
         <div v-for="(gesture, index) in gestures" :key="gesture._id">
@@ -23,7 +26,6 @@
             <b-button
               variant="primary"
               :class="$style.forward"
-              v-if="index !== gestures.length - 1"
               @click="forwardBtn(gesture)"
               >Вперед</b-button
             >
@@ -33,7 +35,7 @@
       <div v-else>
         <L2SExercise
           :curGestures="curGestures"
-          :gestures="gestures"
+          :gestures="gesturesByCategories()"
           @nextPack="nextPack"
         />
       </div>
@@ -76,28 +78,53 @@ export default {
         beginIndex: this.globalIndex + 3,
       });
       this.globalIndex += 3;
+      this.theoryIndex = 0;
+      this.maxIndex = 0;
     },
     getFormat(fileName) {
       return fileName.substring(fileName.indexOf("."), fileName.length);
     },
     forwardBtn(el) {
-      this.theoryIndex++;
-      if (this.maxIndex < this.theoryIndex) {
-        this.maxIndex++;
-        this.curGestures.push(el);
+      if (this.theoryIndex !== this.gestures.length - 1) {
+        this.theoryIndex++;
+        if (this.maxIndex < this.theoryIndex) {
+          this.maxIndex++;
+          this.curGestures.push(el);
+        }
+      } else {
+        const array = this.gesturesByCategories().filter((el) => {
+          let exist = false;
+          for (let i = 0; i < this.curGestures.length; i++) {
+            if (el === this.curGestures[i]) {
+              exist = true;
+            }
+          }
+          if (!exist) {
+            return el;
+          }
+        });
+        const sorted = [...array]
+          .sort(() => Math.random() - Math.random())
+          .slice(0, 3 - this.curGestures.length);
+        this.curGestures = [...this.curGestures, ...sorted];
       }
     },
-  },
-  computed: {
-    ...mapGetters(["GESTURES_BY_CATEGORIES", "USER_ID"]),
-    gestures() {
+    gesturesByCategories() {
       let arr = [];
       this.GESTURES_BY_CATEGORIES.forEach((el) => {
         if (el.length && el[0].category === this.$route.params.category) {
           arr = el;
         }
       });
-      return [...arr].splice(this.globalIndex, arr.length);
+      return arr;
+    },
+  },
+  computed: {
+    ...mapGetters(["GESTURES_BY_CATEGORIES", "USER_ID"]),
+    gestures() {
+      const arr = this.gesturesByCategories();
+      const returnedArr = [...arr].splice(this.globalIndex, arr.length);
+      return returnedArr;
     },
     getWidth() {
       let arr = [];
@@ -106,7 +133,11 @@ export default {
           arr = el;
         }
       });
-      return Math.round((this.globalIndex * 100) / arr.length);
+      if (this.globalIndex > arr.length) {
+        return 100;
+      } else {
+        return Math.round((this.globalIndex * 100) / arr.length);
+      }
     },
   },
   created() {

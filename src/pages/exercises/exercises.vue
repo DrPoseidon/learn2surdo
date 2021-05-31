@@ -16,12 +16,51 @@
         <div v-for="(category, index) in GESTURES_BY_CATEGORIES" :key="index">
           <div v-if="category.length">
             <a @click="check(index)">
-              <b-button :class="$style.btn">
-                {{
-                  categoryName(index)[0].toUpperCase() +
-                    categoryName(index).slice(1)
-                }}</b-button
-              >
+              <div :class="$style.btn">
+                <div :class="$style.pp">
+                  <p>
+                    {{
+                      categoryName(index)[0].toUpperCase() +
+                        categoryName(index).slice(1)
+                    }}
+                  </p>
+
+                  <div :class="$style.progress">
+                    <p
+                      v-if="
+                        getProgress(categoryName(index)) !== 0 &&
+                          getProgress(categoryName(index)) !== 'completed' &&
+                          getProgress(categoryName(index)) !== undefined
+                      "
+                    >
+                      {{ getProgress(categoryName(index)) }}
+                    </p>
+                    <p
+                      v-if="
+                        getProgress(categoryName(index)) === 'completed' &&
+                          getProgress(categoryName(index)) !== undefined
+                      "
+                    >
+                      {{ category.length }}/{{ category.length }}
+                    </p>
+                    <img
+                      :src="require(`PublicStatuses/inTheProcess.png`)"
+                      v-if="
+                        getProgress(categoryName(index)) !== 0 &&
+                          getProgress(categoryName(index)) !== 'completed' &&
+                          getProgress(categoryName(index)) !== undefined
+                      "
+                    />
+                    <img
+                      :src="require(`PublicStatuses/completed.png`)"
+                      v-if="
+                        getProgress(categoryName(index)) === 'completed' &&
+                          getProgress(categoryName(index)) !== undefined
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
             </a>
           </div>
         </div>
@@ -41,6 +80,7 @@ export default {
     return {
       chooseVisibility: false,
       index: undefined,
+      progress: [],
     };
   },
   methods: {
@@ -76,15 +116,60 @@ export default {
         }
       });
     },
+    gesturesByCategories(index) {
+      let arr = [];
+      this.GESTURES_BY_CATEGORIES.forEach((el) => {
+        if (el.length && el[0].category === this.categoryName(index)) {
+          arr = el;
+        }
+      });
+      return arr;
+    },
+    completed(arr) {
+      arr.forEach((el) => {
+        if (el.length) {
+          this.GET_PROGRESS({
+            userID: localStorage.getItem("userID"),
+            category: el[0].category,
+          }).then((result) => {
+            if (result?.beginIndex === 0 || !result?.beginIndex) {
+              this.progress.push({ category: result.category, progress: 0 });
+            } else if (result?.beginIndex > el.length) {
+              this.progress.push({
+                category: result.category,
+                progress: "completed",
+              });
+            } else {
+              this.progress.push({
+                category: result.category,
+                progress: `${result.beginIndex}/${el.length}`,
+              });
+            }
+          });
+        }
+      });
+    },
+    getProgress(categoryName) {
+      let progress;
+      this.progress.forEach((el) => {
+        if (el.category === categoryName) {
+          progress = el.progress;
+        }
+      });
+      console.log(progress);
+      return progress;
+    },
   },
   computed: {
     ...mapGetters(["GESTURES_BY_CATEGORIES", "CATEGORIES", "USER_ID"]),
   },
   created() {
     if (localStorage.getItem("userID")) {
-      this.GET_GESTURES_BY_CATEGORIES();
+      this.GET_GESTURES_BY_CATEGORIES().then(() => {
+        this.completed(this.GESTURES_BY_CATEGORIES);
+      });
     } else {
-      this.$router.push("/register");
+      this.$router.push("/login");
     }
   },
 };

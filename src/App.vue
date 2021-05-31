@@ -6,7 +6,7 @@
   </div>
 </template>
 <script></script>
-<style>
+<style lang="scss" module>
 * {
   margin: 0;
   padding: 0;

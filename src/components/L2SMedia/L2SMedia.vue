@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.root">
     <img
-      :src="require(`Public/${category}/${fileName}`)"
+      :src="require(`PublicGestures/${category}/${fileName}`)"
       alt=""
       v-if="
         getFormat(fileName) === '.jpg' ||
@@ -13,7 +13,7 @@
     />
     <video
       v-else
-      :src="require(`Public/${category}/${fileName}`)"
+      :src="require(`PublicGestures/${category}/${fileName}`)"
       autoplay
       loop
       muted

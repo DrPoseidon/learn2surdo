@@ -37,6 +37,51 @@
       .btn {
         margin-bottom: 5px;
         width: 50vw;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        height: 38px;
+        border-radius: 0.25rem;
+        position: relative;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          background-color: #5c636a;
+        }
+        .pp {
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          position: absolute;
+          display: flex;
+          flex-direction: row;
+          background-color: initial;
+          justify-content: space-between;
+          width: 80%;
+          p {
+            background-color: initial;
+            font-size: 15px;
+            font-weight: 500;
+            margin: 0;
+            padding: 0;
+          }
+          .progress {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: initial;
+            width: 20%;
+            justify-content: space-between;
+            p {
+              margin: 0;
+              padding: 0;
+            }
+            img {
+              width: 20px;
+              background-color: initial;
+            }
+          }
+        }
       }
     }
   }

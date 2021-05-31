@@ -2,6 +2,20 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  .message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: green;
+    background-color: white;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
   .main {
     .theory {
       display: flex;

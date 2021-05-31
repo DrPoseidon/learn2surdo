@@ -18,7 +18,7 @@ export default new VueRouter({
     { path: "/", component: main }, // редиректит
     { path: "/profile", component: profile },
     { path: "/gesture/:category/:id", component: L2SGesture }, // редиректит
-    { path: "/gestures", component: gestures }, // редиректит
+    { path: "/theory", component: gestures }, // редиректит
     { path: "/admin", component: admin },
     { path: "/exercises", component: exercises }, // редиректит
     { path: "/exercise/:category", component: exercise }, // редиректит

@@ -11,7 +11,9 @@
           <b-button variant="primary">Назад</b-button>
         </router-link>
         <img
-          :src="require(`Public/${$route.params.category}/${gesture.fileName}`)"
+          :src="
+            require(`PublicGestures/${$route.params.category}/${gesture.fileName}`)
+          "
           alt=""
           v-if="
             getFormat(gesture.fileName) === '.jpg' ||
@@ -22,7 +24,9 @@
         />
         <video
           v-else
-          :src="require(`Public/${$route.params.category}/${gesture.fileName}`)"
+          :src="
+            require(`PublicGestures/${$route.params.category}/${gesture.fileName}`)
+          "
           autoplay
           loop
           muted

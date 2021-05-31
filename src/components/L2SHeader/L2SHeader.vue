@@ -2,9 +2,9 @@
   <div :class="$style.root">
     <a href="/"><h2>Learn2Surdo</h2></a>
     <div :class="$style.links">
-      <a href="/gestures">Глоссарий</a>
+      <a href="/theory">Глоссарий</a>
       <a href="/exercises">Упражнения</a>
-      <a href="#">Тестирование</a>
+      <a>Тестирование</a>
       <div :class="$style.login">
         <b-button variant="danger" @click="quit">Выйти</b-button>
         <p>{{ login }}</p>
