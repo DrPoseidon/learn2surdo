@@ -95,7 +95,15 @@ export default {
   },
 
   async SET_PROGRESS(vuex, data) {
-    const res = await axios.post(`${uri}set-progress`, data);
-    res;
+    await axios.post(`${uri}set-progress`, data);
+  },
+
+  async SET_GESTURE_PROGRESS(vuex, data) {
+    await axios.post(`${uri}add-gesture-progress`, data);
+  },
+
+  async GET_GESTURE_PROGRESS(vuex, data) {
+    const res = await axios.post(`${uri}get-gesture-progress`, data);
+    return res.data;
   },
 };

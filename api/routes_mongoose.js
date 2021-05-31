@@ -6,6 +6,7 @@ const Gestures = require("./models/gestures");
 const Categories = require("./models/categories");
 const Users = require("./models/users");
 const Progress = require("./models/progress");
+const GestureProgress = require("./models/gestureProgress");
 
 try {
   mongoose.connect(dbConnectionString, {
@@ -232,6 +233,26 @@ router.post("/set-progress", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.post("/add-gesture-progress", async (req, res) => {
+  await GestureProgress.insertMany(req.body)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.post("/get-gesture-progress", async (req, res) => {
+  await GestureProgress.find(req.body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 module.exports = router;

@@ -69,8 +69,19 @@ export default {
       "GET_GESTURES_BY_CATEGORIES",
       "SET_PROGRESS",
       "GET_PROGRESS",
+      "SET_GESTURE_PROGRESS",
     ]),
     nextPack() {
+      const sendToProgress = [];
+      [...this.curGestures].forEach((el) => {
+        sendToProgress.push({
+          userID: localStorage.getItem("userID"),
+          gestureID: el._id,
+          category: el.category,
+        });
+      });
+      this.SET_GESTURE_PROGRESS(sendToProgress);
+
       this.curGestures = [];
       this.SET_PROGRESS({
         userID: localStorage.getItem("userID"),

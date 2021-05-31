@@ -11,7 +11,7 @@
     .gestures {
       display: flex;
       flex-direction: column;
-      max-height: 600px;
+      max-height: 400px;
       overflow-y: auto;
       .gesture {
         background-color: white;
@@ -19,6 +19,14 @@
         margin: 0 50px;
         padding: 10px;
         text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        img {
+          background-color: initial;
+          height: 20px;
+        }
         &:not(:first-child) {
           margin-top: 5px;
         }

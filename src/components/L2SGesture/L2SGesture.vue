@@ -10,29 +10,11 @@
         >
           <b-button variant="primary">Назад</b-button>
         </router-link>
-        <img
-          :src="
-            require(`PublicGestures/${$route.params.category}/${gesture.fileName}`)
-          "
-          alt=""
-          v-if="
-            getFormat(gesture.fileName) === '.jpg' ||
-              getFormat(gesture.fileName) === '.png' ||
-              getFormat(gesture.fileName) === '.jpeg'
-          "
+        <L2SMedia
+          :category="$route.params.category"
+          :fileName="gesture.fileName"
           :class="$style.media"
         />
-        <video
-          v-else
-          :src="
-            require(`PublicGestures/${$route.params.category}/${gesture.fileName}`)
-          "
-          autoplay
-          loop
-          muted
-          preload=""
-          :class="$style.media"
-        ></video>
         <router-link
           :to="`/gesture/${$route.params.category}/${getForwardID}`"
           v-if="getForwardID !== undefined"
@@ -51,10 +33,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import L2SHeader from "Components/L2SHeader";
+import L2SMedia from "Components/L2SMedia";
 export default {
   name: "L2SGesture",
   components: {
     L2SHeader,
+    L2SMedia,
   },
   computed: {
     ...mapGetters(["GESTURES", "USER_ID"]),
@@ -103,9 +87,6 @@ export default {
   },
   methods: {
     ...mapActions(["GET_ALL_GESTURES_FROM_DB"]),
-    getFormat(fileName) {
-      return fileName.substring(fileName.indexOf("."), fileName.length);
-    },
   },
   created() {
     if (localStorage.getItem("userID")) {

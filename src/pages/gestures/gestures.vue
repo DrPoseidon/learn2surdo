@@ -11,14 +11,18 @@
             }}</b-button
           >
           <div v-if="checkVisibility(index)" :class="$style.gestures">
-            <router-link
-              :to="`/gesture/${categoryName(index)}/${gesture._id}`"
+            <a
+              :href="`/gesture/${categoryName(index)}/${gesture._id}`"
               v-for="gesture in category"
               :key="gesture._id"
               :class="$style.gesture"
             >
               {{ gesture.title }}
-            </router-link>
+              <img
+                :src="require(`PublicStatuses/completed.png`)"
+                v-if="getProgress(gesture._id, gesture.category)"
+              />
+            </a>
           </div>
         </div>
       </div>
@@ -36,13 +40,14 @@ export default {
   data() {
     return {
       visibilityArray: [],
+      progress: [],
     };
   },
   computed: {
     ...mapGetters(["GESTURES_BY_CATEGORIES", "CATEGORIES", "USER_ID"]),
   },
   methods: {
-    ...mapActions(["GET_GESTURES_BY_CATEGORIES"]),
+    ...mapActions(["GET_GESTURES_BY_CATEGORIES", "GET_GESTURE_PROGRESS"]),
     categoryName(index) {
       return this.CATEGORIES[index].title;
     },
@@ -59,10 +64,28 @@ export default {
     checkVisibility(index) {
       return !!(this.visibilityArray.indexOf(index) !== -1);
     },
+    getStatus() {
+      this.GET_GESTURE_PROGRESS({
+        userID: localStorage.getItem("userID"),
+      }).then((result) => {
+        if (result.length) {
+          this.progress = result;
+        }
+      });
+    },
+    getProgress(id, category) {
+      let progress = false;
+      [...this.progress].forEach((el) => {
+        if (el.gestureID === id && el.category === category) progress = true;
+      });
+      return progress;
+    },
   },
   created() {
     if (localStorage.getItem("userID")) {
-      this.GET_GESTURES_BY_CATEGORIES();
+      this.GET_GESTURES_BY_CATEGORIES().then(() => {
+        this.getStatus();
+      });
     } else {
       this.$router.push("/login");
     }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.root">
+  <div :class="$style.root" v-if="fileName">
     <img
       :src="require(`PublicGestures/${category}/${fileName}`)"
       alt=""
