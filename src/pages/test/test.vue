@@ -36,7 +36,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["GET_ALL_GESTURES_FROM_DB", "GET_GESTURES_OF_CATEGORY"]),
+    ...mapActions([
+      "GET_ALL_GESTURES_FROM_DB",
+      "GET_GESTURES_OF_CATEGORY",
+      "SET_TEST_RESULT",
+    ]),
     exercisesVariants() {
       const arr = [];
       for (let i = 0; i < 4; i++) {
@@ -55,9 +59,12 @@ export default {
       this.answers.push(data);
       this.curIndex++;
     },
-
     goToCheck(data) {
       this.answers = data;
+      this.SET_TEST_RESULT({
+        userID: localStorage.getItem("userID"),
+        results: this.answers,
+      });
       this.check = true;
     },
   },

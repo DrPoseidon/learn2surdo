@@ -106,4 +106,8 @@ export default {
     const res = await axios.post(`${uri}get-gesture-progress`, data);
     return res.data;
   },
+
+  async SET_TEST_RESULT(vuex, data) {
+    await axios.post(`${uri}set-test-result`, data);
+  },
 };
