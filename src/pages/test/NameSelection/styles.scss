@@ -1,0 +1,13 @@
+.root {
+  p {
+    color: white;
+    font-size: 20px;
+  }
+  .pp {
+    display: flex;
+    flex-direction: row;
+    p:first-child {
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.root {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .backBtn {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, 0);
+  }
+  .forwardBtn {
+    position: absolute;
+    top: 50%;
+    right: 30%;
+    transform: translate(-50%, 0);
+  }
+  .correct {
+    color: green;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid green;
+    font-size: 20px;
+    padding: 5px;
+  }
+  .error {
+    color: red;
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid red;
+    font-size: 20px;
+    padding: 5px;
+    width: 300px;
+  }
+}
