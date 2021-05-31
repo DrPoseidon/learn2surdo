@@ -3,8 +3,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
   background-color: #2ea3f8;
   margin: 2% 5% 0 5%;
   height: 100px;
@@ -18,7 +18,7 @@
       background-color: transparent;
     }
     &:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
     transition: 0.3s;
     text-decoration: none;

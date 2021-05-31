@@ -10,6 +10,7 @@ import exercise from "Pages/exercises/exercise";
 import register from "Pages/register";
 import login from "Pages/login";
 import test from "Pages/test";
+import personalProgress from "Pages/personalProgress";
 
 Vue.use(VueRouter);
 
@@ -26,5 +27,6 @@ export default new VueRouter({
     { path: "/register", component: register },
     { path: "/login", component: login },
     { path: "/test", component: test },
+    { path: "/personalProgress", component: personalProgress },
   ],
 });

@@ -156,6 +156,7 @@ export default {
           progress = el.progress;
         }
       });
+      console.log(progress);
       return progress;
     },
   },

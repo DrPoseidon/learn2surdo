@@ -1,0 +1,72 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .main {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    .testResults {
+      h2 {
+        color: white;
+      }
+      .test {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 120px;
+        align-items: center;
+        p {
+          margin: 0;
+          font-size: 20px;
+        }
+        .date {
+          border-radius: 10px 0 0 10px;
+          margin-right: 10px;
+        }
+        .result {
+          border-radius: 0 10px 10px 0;
+        }
+        .date,
+        .result {
+          background-color: white;
+          border: 2px solid black;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .categoriesProgress {
+      h2 {
+        color: white;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 120px;
+      .res {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        p {
+          margin: 0;
+          font-size: 20px;
+        }
+        .category {
+          border-radius: 10px 0 0 10px;
+          margin-right: 10px;
+        }
+        .progress {
+          border-radius: 0 10px 10px 0;
+        }
+        .category,
+        .progress {
+          background-color: white;
+          border: 2px solid black;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}

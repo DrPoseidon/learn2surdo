@@ -5,6 +5,7 @@
       <a href="/theory">Глоссарий</a>
       <a href="/exercises">Упражнения</a>
       <a href="/test">Тестирование</a>
+      <a href="/personalProgress">Прогресс</a>
       <div :class="$style.login">
         <b-button variant="danger" @click="quit">Выйти</b-button>
         <p>{{ login }}</p>

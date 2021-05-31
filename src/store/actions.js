@@ -110,4 +110,9 @@ export default {
   async SET_TEST_RESULT(vuex, data) {
     await axios.post(`${uri}set-test-result`, data);
   },
+
+  async GET_TEST_RESULTS(vuex, data) {
+    const res = await axios.post(`${uri}get-test-results`, data);
+    return res.data;
+  },
 };

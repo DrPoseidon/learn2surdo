@@ -266,4 +266,14 @@ router.post("/set-test-result", async (req, res) => {
     });
 });
 
+router.post("/get-test-results", async (req, res) => {
+  await TestResults.find(req.body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;
