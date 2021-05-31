@@ -106,9 +106,9 @@ export default {
           answer: this.curGestures,
           exercise: "comparison",
         });
-        console.log("success");
+        // console.log("success");
       } else {
-        console.log("error");
+        // console.log("error");
         this.$emit("nextGesture", {
           success: false,
           gesture: this.curGestures,

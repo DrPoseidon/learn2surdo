@@ -125,7 +125,7 @@ export default {
             } else {
               this.changeMessage(result.data);
               this.error = true;
-              console.log(result.data);
+              // console.log(result.data);
             }
           });
         }
@@ -160,7 +160,7 @@ export default {
             } else {
               this.changeMessage(result.data);
               this.error = true;
-              console.log(result.data);
+              // console.log(result.data);
             }
           });
         }

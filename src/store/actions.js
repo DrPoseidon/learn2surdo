@@ -1,6 +1,6 @@
 import axios from "axios";
-const uri = "http://localhost:3000/";
-// const uri = "https://api.drposeidon.ru/";
+// const uri = "http://localhost:3000/";
+const uri = "https://api.drposeidon.ru/";
 export default {
   async ADD_GESTURES_TO_DB({ dispatch }, data) {
     const res = await axios.post(`${uri}add-multiple-gestures`, data);
