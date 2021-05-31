@@ -1,0 +1,13 @@
+.root {
+  margin-top: 20px;
+  .placeHolder {
+    width: 80vw;
+    height: 20px;
+    background-color: #3e6988;
+
+    .progress {
+      background-color: blue;
+      height: 100%;
+    }
+  }
+}

@@ -4,7 +4,7 @@
     <div :class="$style.links">
       <a href="/theory">Глоссарий</a>
       <a href="/exercises">Упражнения</a>
-      <a>Тестирование</a>
+      <a href="/test">Тестирование</a>
       <div :class="$style.login">
         <b-button variant="danger" @click="quit">Выйти</b-button>
         <p>{{ login }}</p>

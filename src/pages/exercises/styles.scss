@@ -1,4 +1,7 @@
 .root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .choose {
     background-color: white;
     border: 2px solid black;
@@ -22,10 +25,10 @@
   .main {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 50vw;
+    // position: relative;
+    // left: 50%;
+    // transform: translate(-50%, 0);
+    // width: 50vw;
     h2 {
       color: white;
     }

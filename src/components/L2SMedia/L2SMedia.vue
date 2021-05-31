@@ -27,14 +27,8 @@
 export default {
   name: "L2SMedia",
   props: {
-    category: {
-      type: String,
-      required: true,
-    },
-    fileName: {
-      type: String,
-      required: true,
-    },
+    category: String,
+    fileName: String,
     width: {
       type: String,
       default: "20vw",
