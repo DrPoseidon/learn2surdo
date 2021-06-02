@@ -28,13 +28,15 @@
               :style="{
                 borderColor: getColor(image, 'image'),
                 opacity: getOpacity(image, 'image'),
+                width: getWidth,
+                height: getWidth,
               }"
             ></div>
             <L2SMedia
               :class="$style.image"
               :category="image.category"
               :fileName="image.fileName"
-              width="10vw"
+              :width="getWidth"
             />
           </a>
         </div>
@@ -65,6 +67,7 @@
 </template>
 <script>
 import L2SMedia from "Components/L2SMedia";
+import { mapGetters } from "vuex";
 export default {
   name: "L2SComparisonTask",
   components: {
@@ -226,6 +229,10 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["DEVICE"]),
+    getWidth() {
+      return this.DEVICE === "pc" ? "10vw" : "30vw";
+    },
     images() {
       const { curGestures } = this;
       return [...curGestures].sort(() => Math.random() - 0.5);

@@ -19,12 +19,13 @@
               [$style.success]: index === successIndex,
             },
           ]"
+          :style="{ width: getWidth, height: getWidth }"
         ></div>
         <L2SMedia
           :class="$style.button"
           :category="button.category"
           :fileName="button.fileName"
-          width="15vw"
+          :width="getWidth"
         />
       </a>
     </div>
@@ -32,6 +33,7 @@
 </template>
 <script>
 import L2SMedia from "Components/L2SMedia";
+import { mapGetters } from "vuex";
 export default {
   name: "L2SImageSelectionTask",
   components: {
@@ -78,6 +80,10 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["DEVICE"]),
+    getWidth() {
+      return this.DEVICE === "pc" ? "15vw" : "30vw";
+    },
     buttons() {
       const arr = this.gestures.filter((el) => {
         let exist = false;

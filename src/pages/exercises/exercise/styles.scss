@@ -22,19 +22,38 @@
       align-items: center;
       flex-direction: column;
       position: relative;
-      .back {
-        position: absolute;
-        top: 50%;
-        left: -3%;
-        transform: translate(-35%, -50%);
-        z-index: 1;
+      @media (min-width: 1300px) {
+        .back {
+          position: absolute;
+          top: 50%;
+          left: -3%;
+          transform: translate(-35%, -50%);
+          z-index: 1;
+        }
+        .forward {
+          position: absolute;
+          top: 50%;
+          right: -3%;
+          transform: translate(35%, -50%);
+          z-index: 1;
+        }
       }
-      .forward {
-        position: absolute;
-        top: 50%;
-        right: -3%;
-        transform: translate(35%, -50%);
-        z-index: 1;
+      @media (max-width: 1299px) {
+        .forward {
+          position: absolute;
+          top: 80px;
+          right: -20px;
+        }
+        .back {
+          position: absolute;
+          top: 80px;
+          left: -20px;
+        }
+        .forward,
+        .back {
+          width: 80px;
+          z-index: 2;
+        }
       }
     }
   }

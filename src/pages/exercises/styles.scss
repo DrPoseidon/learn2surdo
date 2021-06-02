@@ -5,7 +5,10 @@
   .choose {
     background-color: white;
     border: 2px solid black;
-    width: 500px;
+    width: 25vw;
+    @media (max-width: 1299px) {
+      width: 80vw;
+    }
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -25,21 +28,22 @@
   .main {
     display: flex;
     flex-direction: column;
-    // position: relative;
-    // left: 50%;
-    // transform: translate(-50%, 0);
-    // width: 50vw;
     h2 {
       color: white;
+      width: 80vw;
     }
     .categories {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin: 5px;
+
       .btn {
         margin-bottom: 5px;
-        width: 50vw;
+        width: 40vw;
+        @media (max-width: 1299px) {
+          width: 80vw;
+        }
         background-color: #6c757d;
         color: white;
         text-decoration: none;
@@ -74,6 +78,9 @@
             align-items: center;
             background-color: initial;
             width: 20%;
+            @media (max-width: 1299px) {
+              width: 30%;
+            }
             justify-content: space-between;
             p {
               margin: 0;
