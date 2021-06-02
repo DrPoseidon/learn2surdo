@@ -88,6 +88,8 @@ export default {
       "GET_GESTURES_BY_CATEGORIES",
       "GET_PROGRESS",
       "SET_PROGRESS",
+      "GET_ALL_GESTURES_FROM_DB",
+      "GET_ALL_CATEGORIES_FROM_DB",
     ]),
     categoryName(index) {
       return this.CATEGORIES[index].title;
@@ -165,6 +167,8 @@ export default {
   },
   created() {
     if (localStorage.getItem("userID")) {
+      this.GET_ALL_GESTURES_FROM_DB();
+      this.GET_ALL_CATEGORIES_FROM_DB();
       this.GET_GESTURES_BY_CATEGORIES().then(() => {
         this.completed(this.GESTURES_BY_CATEGORIES);
       });

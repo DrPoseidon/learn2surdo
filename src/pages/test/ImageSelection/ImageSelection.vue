@@ -9,18 +9,19 @@
       v-if="!success"
       :fileName="answer.fileName"
       :category="answer.category"
-      width="200px"
+      :width="getWidth"
     />
     <p v-if="!success">А нужно было</p>
     <L2SMedia
       :fileName="correct.fileName"
       :category="correct.category"
-      width="200px"
+      :width="getWidth"
     />
   </div>
 </template>
 <script>
 import L2SMedia from "Components/L2SMedia";
+import { mapGetters } from "vuex";
 export default {
   name: "ImageSelection",
   components: {
@@ -38,6 +39,12 @@ export default {
     success: {
       type: Boolean,
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(["DEVICE"]),
+    getWidth() {
+      return this.DEVICE === "pc" ? "200px" : "130px";
     },
   },
 };

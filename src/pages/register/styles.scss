@@ -1,6 +1,9 @@
 .root {
   .form {
     width: 20vw;
+    @media (max-width: 1299px) {
+      width: 50vw;
+    }
     position: absolute;
     top: 50%;
     left: 50%;

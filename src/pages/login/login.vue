@@ -56,7 +56,7 @@ export default {
           password: crypto.MD5(password).toString(),
         }).then((result) => {
           if (result === "redirectToHome") {
-            this.$router.push("/");
+            window.location.href = "/";
           } else {
             this.loginState = false;
             this.passwordState = false;

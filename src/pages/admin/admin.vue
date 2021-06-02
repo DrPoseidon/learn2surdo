@@ -13,6 +13,13 @@ export default {
     L2SAddForm,
     L2SShowAllData,
   },
+  created() {
+    if (!localStorage.getItem("userID")) {
+      this.$router.push("/login");
+    } else if (JSON.parse(localStorage.getItem("role")) !== true) {
+      this.$router.push("/");
+    }
+  },
 };
 </script>
 <style lang="scss" module>

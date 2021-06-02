@@ -9,6 +9,7 @@ const REGISTER = async ({ commit }, data) => {
     commit("SET_USER_ID", res.data.id);
     localStorage.setItem("userID", res.data.id);
     localStorage.setItem("login", res.data.login);
+    localStorage.setItem("role", res.data.role);
     return "redirectToHome";
   }
 };
@@ -21,6 +22,7 @@ const LOGIN = async ({ commit }, data) => {
     commit("SET_USER_ID", res.data.id);
     localStorage.setItem("userID", res.data.id);
     localStorage.setItem("login", res.data.login);
+    localStorage.setItem("role", res.data.role);
     return "redirectToHome";
   }
 };

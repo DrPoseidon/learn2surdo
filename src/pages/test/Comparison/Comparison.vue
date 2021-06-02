@@ -12,13 +12,14 @@
       <L2SMedia
         :fileName="comp.fileName"
         :category="comp.category"
-        width="170px"
+        :width="getWidth"
       />
     </div>
   </div>
 </template>
 <script>
 import L2SMedia from "Components/L2SMedia";
+import { mapGetters } from "vuex";
 export default {
   name: "Comparison",
   components: {
@@ -32,6 +33,12 @@ export default {
     index: {
       type: Number,
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(["DEVICE"]),
+    getWidth() {
+      return this.DEVICE === "pc" ? "170px" : "130px";
     },
   },
 };

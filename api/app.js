@@ -1,11 +1,11 @@
-const app = require("express")();
-const bodyParser = require("body-parser");
+const express = require("express");
+const app = express();
 const cors = require("cors");
-const routes = require("./routes_mongoose");
+const routes = require("./routes");
 const PORT = 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cors());
 app.use("/", routes);
 

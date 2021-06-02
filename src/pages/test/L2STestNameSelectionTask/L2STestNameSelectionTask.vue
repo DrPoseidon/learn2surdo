@@ -3,7 +3,7 @@
     <L2SMedia
       :category="gesture.category"
       :fileName="gesture.fileName"
-      width="20vw"
+      :width="getWidth"
     />
     <div :class="$style.description">
       Какой жест изображен?
@@ -22,6 +22,7 @@
 </template>
 <script>
 import L2SMedia from "Components/L2SMedia";
+import { mapGetters } from "vuex";
 export default {
   name: "L2STestNameSelectionTask",
   components: {
@@ -61,6 +62,10 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["DEVICE"]),
+    getWidth() {
+      return this.DEVICE === "pc" ? "20vw" : "40vw";
+    },
     buttons() {
       const arr = this.gestures.filter((el) => {
         let exist = false;

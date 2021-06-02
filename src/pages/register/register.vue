@@ -115,7 +115,7 @@ export default {
             }, 1000);
           }
           if (result === "redirectToHome") {
-            this.$router.push("/");
+            window.location.href = "/";
           }
         });
       }

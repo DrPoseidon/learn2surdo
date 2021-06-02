@@ -5,7 +5,7 @@
       <div :class="$style.bigHeader" v-if="DEVICE === 'pc'">
         <div :class="$style.links">
           <a href="/theory">Глоссарий</a>
-          <a href="/exercises">Упражнения</a>
+          <a href="/">Упражнения</a>
           <a href="/test">Тестирование</a>
           <a href="/personalProgress">Прогресс</a>
         </div>
@@ -37,10 +37,10 @@
             </div>
             <div :class="$style.aa">
               <a href="/theory">Глоссарий</a>
-              <a href="/exercises">Упражнения</a>
+              <a href="/">Упражнения</a>
               <a href="/test">Тестирование</a>
               <a href="/personalProgress">Прогресс</a>
-              <a @click="quit" :class="$style.quit"></a>
+              <a @click="quit" :class="$style.quit">Выйти</a>
             </div>
           </div>
         </transition>

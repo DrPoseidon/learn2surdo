@@ -4,7 +4,7 @@
 
     <div :class="$style.main">
       <Exercises
-        v-if="gestures"
+        v-if="gestures && !check"
         :gestures="gestures"
         :exercises="exercises"
         :allGestures="GESTURES"

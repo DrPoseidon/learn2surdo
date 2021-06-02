@@ -1,23 +1,12 @@
-const mongoose = require("mongoose");
 const router = require("express").Router();
-const dbConnectionString =
-  "mongodb+srv://DrPoseidon:I2DGNYEtkCk5au5a@drposeidoncluster.cy20x.mongodb.net/learn2sudo?retryWrites=true&w=majority";
-const Gestures = require("./models/gestures");
-const Categories = require("./models/categories");
-const Users = require("./models/users");
-const Progress = require("./models/progress");
-const GestureProgress = require("./models/gestureProgress");
-const TestResults = require("./models/testResults");
-
-try {
-  mongoose.connect(dbConnectionString, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  console.log("Connection successful");
-} catch (err) {
-  console.error(err);
-}
+const {
+  Gestures,
+  Categories,
+  Users,
+  Progress,
+  GestureProgress,
+  TestResults,
+} = require("./db");
 
 router.get("/", (req, res) => {
   res.send("Learn2Surdo API");
@@ -182,7 +171,11 @@ router.post("/register", async (req, res) => {
       Users.create(req.body)
         .then(() => {
           Users.findOne({ login: req.body.login }).then((element) => {
-            res.send({ id: element._id, login: element.login });
+            res.send({
+              id: element._id,
+              login: element.login,
+              role: element.role,
+            });
           });
         })
         .catch((err) => {
@@ -198,7 +191,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await Users.findOne(req.body);
     if (user) {
-      res.send({ id: user._id, login: user.login });
+      res.send({ id: user._id, login: user.login, role: user.role });
     } else {
       res.send({ message: "Неправильно введен логин или пароль" });
     }
