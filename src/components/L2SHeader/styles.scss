@@ -16,6 +16,8 @@
       font-weight: 500;
       pointer-events: none;
       background-color: transparent;
+      font-size: 6vw;
+      margin: 0;
     }
     &:hover {
       transform: scale(1.1);
@@ -24,40 +26,140 @@
     text-decoration: none;
     background-color: initial;
   }
-  .login {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  .headers {
     background-color: initial;
-    align-items: center;
-    p {
-      color: white;
-      background-color: initial;
-      margin: 0;
-      margin-left: 10px;
-      font-size: 20px;
-      border: 2px solid white;
-      border-radius: 5px;
-      padding: 2px;
-      pointer-events: none;
-    }
-  }
-  .links {
-    background-color: transparent;
-    width: 70%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    a {
-      background-color: transparent;
-      text-decoration: none;
-      color: white;
-      font-weight: 600;
-      font-size: 20px;
-      transition: 0.3s;
-      &:hover {
-        transform: scale(1.2);
+    .miniHeader {
+      z-index: 2;
+      background-color: initial;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .hamburger {
+        width: 5vw;
+        background-color: initial;
+        filter: invert(1);
+        transition: 0.3s;
+        &:hover {
+          transform: scale(1.3);
+        }
+      }
+      .right {
+        animation: toRight 0.5s;
+      }
+      @keyframes toRight {
+        0% {
+          margin-left: -100%;
+        }
+        100% {
+          margin-left: 0;
+        }
+      }
+      .left {
+        animation: toLeft 0.5s;
+      }
+      @keyframes toLeft {
+        0% {
+          margin-left: 0%;
+        }
+        100% {
+          margin-left: -100%;
+        }
+      }
+      .links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: initial;
+        justify-content: space-between;
+        background-color: white;
+        .close {
+          background-color: initial;
+          width: 30px;
+          top: 20px;
+          right: 20px;
+          position: absolute;
+          transition: 0.3s;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.3);
+          }
+        }
+        .aa {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 30px;
+          background-color: initial;
+
+          height: 30vh;
+          justify-content: space-between;
+          a {
+            font-weight: 600;
+          }
+        }
+      }
+      .login {
+        background-color: initial;
+        margin-right: 20px;
+        p {
+          color: white;
+          background-color: initial;
+          margin: 0;
+        }
+      }
+    }
+
+    .bigHeader {
+      background-color: initial;
+      width: 35vw;
+      .login {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: initial;
+        align-items: center;
+        margin-left: 20px;
+        p {
+          color: white;
+          background-color: initial;
+          margin: 0;
+          margin-left: 10px;
+          font-size: 20px;
+          border: 2px solid white;
+          border-radius: 5px;
+          padding: 2px;
+          pointer-events: none;
+        }
+      }
+      .links {
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        a {
+          background-color: transparent;
+          text-decoration: none;
+          color: white;
+          font-weight: 600;
+          font-size: 20px;
+          transition: 0.3s;
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
       }
     }
   }

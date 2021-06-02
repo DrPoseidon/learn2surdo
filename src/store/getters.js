@@ -11,4 +11,7 @@ export default {
   USER_ID(state) {
     return state.userID;
   },
+  DEVICE(state) {
+    return state.device;
+  },
 };

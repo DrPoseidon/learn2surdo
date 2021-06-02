@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.root">
     <L2SHeader />
+
     <div :class="$style.main">
       <Exercises
         v-if="gestures"
@@ -30,7 +31,6 @@ export default {
     return {
       exercises: ["comparison", "imageSelection", "nameSelection"],
       gestures: undefined,
-      curIndex: 0,
       answers: [],
       check: false,
     };

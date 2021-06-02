@@ -11,4 +11,7 @@ export default {
   SET_USER_ID: (state, data) => {
     state.userID = data;
   },
+  SET_DEVICE_MUTATION: (state, data) => {
+    state.device = data;
+  },
 };

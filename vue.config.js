@@ -10,6 +10,7 @@ module.exports = {
         Blocks: path.resolve(__dirname, "src/blocks"),
         PublicGestures: path.resolve(__dirname, "public/gestures"),
         PublicStatuses: path.resolve(__dirname, "public/statuses"),
+        PublicAssets: path.resolve(__dirname, "public/assets"),
       },
     },
   },

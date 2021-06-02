@@ -82,7 +82,7 @@ export default {
     nextGesture(error) {
       this.curIndex++;
       this.globalError += error;
-      console.log(this.curIndex);
+      // console.log(this.curIndex);
       console.log("Ошибки " + this.globalError);
       if (this.curIndex === this.curGestures.length) {
         this.curIndex = 0;

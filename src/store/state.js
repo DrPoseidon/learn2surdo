@@ -3,4 +3,5 @@ export default {
   gestures: [],
   gesturesByCategories: [],
   userID: undefined,
+  device: "pc",
 };

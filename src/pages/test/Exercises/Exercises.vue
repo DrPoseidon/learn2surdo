@@ -1,5 +1,9 @@
 <template>
   <div :class="$style.root">
+    <L2SProgressBar
+      :percent="(curIndex * 100) / 10"
+      :class="$style.progressBar"
+    />
     <div
       v-for="(gesture, index) in gestures"
       :key="gesture._id"
@@ -31,6 +35,7 @@
 import L2STestComparisonTask from "../L2STestComparisonTask";
 import L2STestImageSelectionTask from "../L2STestImageSelectionTask";
 import L2STestNameSelectionTask from "../L2STestNameSelectionTask";
+import L2SProgressBar from "../L2SProgressBar";
 export default {
   name: "Exercises",
   data() {
@@ -43,6 +48,7 @@ export default {
     L2STestComparisonTask,
     L2STestImageSelectionTask,
     L2STestNameSelectionTask,
+    L2SProgressBar,
   },
   props: {
     gestures: {
