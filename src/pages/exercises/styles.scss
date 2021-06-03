@@ -9,6 +9,11 @@
     @media (max-width: 1299px) {
       width: 80vw;
     }
+    p {
+      color: black;
+      background-color: initial;
+      font-size: 15px;
+    }
     padding: 20px;
     display: flex;
     flex-direction: column;

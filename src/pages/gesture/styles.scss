@@ -17,11 +17,17 @@
       }
       .forward {
         position: absolute;
-        right: -100px;
+        right: -70px;
       }
       .back {
         position: absolute;
-        left: -100px;
+        left: -70px;
+      }
+      .forward,
+      .back {
+        button {
+          width: 80px;
+        }
       }
     }
     .title {
@@ -32,7 +38,10 @@
     .description {
       color: white;
       font-size: 20px;
-      width: 500px;
+      width: 80vw;
+      @media (min-width: 1300px) {
+        width: 40vw;
+      }
       text-align: center;
     }
   }

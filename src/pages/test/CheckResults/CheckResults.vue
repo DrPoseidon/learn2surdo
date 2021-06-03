@@ -64,6 +64,9 @@ export default {
       return name === "imageSelection" ? ImageSelection : NameSelection;
     },
   },
+  created() {
+    console.log(this.answers);
+  },
 };
 </script>
 <style lang="scss" module>

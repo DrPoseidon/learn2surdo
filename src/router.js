@@ -10,6 +10,7 @@ import register from "Pages/register";
 import login from "Pages/login";
 import test from "Pages/test";
 import personalProgress from "Pages/personalProgress";
+import testResult from "Pages/personalProgress/testResult";
 
 Vue.use(VueRouter);
 
@@ -26,5 +27,6 @@ export default new VueRouter({
     { path: "/login", component: login },
     { path: "/test", component: test },
     { path: "/personalProgress", component: personalProgress },
+    { path: "/testResult/:id", component: testResult },
   ],
 });

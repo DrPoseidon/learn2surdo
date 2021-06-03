@@ -2,28 +2,17 @@
   <div :class="$style.root">
     <L2SHeader />
     <div :class="$style.main">
-      <div :class="$style.testResults" v-if="testResults.length">
-        <h2>Результаты тестов</h2>
-        <div
-          v-for="result in testResults"
-          :key="result._d"
-          :class="$style.test"
-        >
-          <p :class="$style.date">
-            {{ getRusDate(result.createdAt.slice(0, 10)) }}
-          </p>
-          <p :class="$style.result">
-            {{ getAVG(result) }}
-          </p>
-        </div>
-      </div>
-      <div :class="$style.categoriesProgress">
-        <h2>Прогресс упраженений</h2>
+      <div :class="$style.categoriesProgress" v-if="progress.length">
+        <h2>Прогресс категорий</h2>
         <div
           v-for="(category, index) in progress"
           :key="index"
           :class="$style.res"
         >
+          <div
+            :class="$style.progressBar"
+            :style="{ width: `${category.percent}%` }"
+          ></div>
           <p :class="$style.category" v-if="category.progress">
             {{ category.category }}
           </p>
@@ -31,6 +20,29 @@
             {{ category.progress }}
           </p>
         </div>
+      </div>
+      <div :class="$style.testResults" v-if="testResults.length">
+        <h2>Результаты тестов</h2>
+        <router-link
+          :to="`/testResult/${result._id}`"
+          v-for="result in testResults"
+          :key="result._d"
+          :class="[$style.res, $style.test]"
+        >
+          <div
+            :class="$style.progressBar"
+            :style="{
+              width: `${Math.round((getAVG(result) * 100) / 10)}%`,
+              backgroundColor: getColor(
+                Math.round((getAVG(result) * 100) / 10)
+              ),
+            }"
+          ></div>
+          <p :class="$style.category">
+            {{ getRusDate(result.createdAt.slice(0, 10)) }}
+          </p>
+          <p :class="$style.progress">{{ getAVG(result) }}/10</p>
+        </router-link>
       </div>
     </div>
   </div>
@@ -58,6 +70,15 @@ export default {
       "GET_GESTURES_BY_CATEGORIES",
       "GET_PROGRESS",
     ]),
+    getColor(percent) {
+      if (percent < 50) {
+        return "tomato";
+      } else if (percent >= 50 && percent < 80) {
+        return "orange";
+      } else {
+        return "greenyellow";
+      }
+    },
     getAVG(element) {
       let completed = 0;
       element.results.forEach((el) => {
@@ -65,7 +86,7 @@ export default {
           completed++;
         }
       });
-      return `${completed}/10`;
+      return completed;
     },
     getRusDate(date) {
       const year = date.substr(0, 4);
@@ -80,17 +101,17 @@ export default {
             userID: localStorage.getItem("userID"),
             category: el[0].category,
           }).then((result) => {
-            if (result?.beginIndex === 0 || !result?.beginIndex) {
-              this.progress.push({ category: result.category, progress: 0 });
-            } else if (result?.beginIndex > el.length) {
+            if (result.beginIndex && result?.beginIndex > el.length) {
               this.progress.push({
                 category: result.category,
                 progress: `${el.length}/${el.length}`,
+                percent: 100,
               });
-            } else {
+            } else if (result.beginIndex && result?.beginIndex < el.length) {
               this.progress.push({
                 category: result.category,
                 progress: `${result.beginIndex}/${el.length}`,
+                percent: Math.round(result.beginIndex * 100) / el.length,
               });
             }
           });
@@ -98,19 +119,27 @@ export default {
       });
     },
   },
-  mounted() {
+  created() {
     if (localStorage.getItem("userID")) {
       this.GET_TEST_RESULTS({ userID: localStorage.getItem("userID") }).then(
         (result) => {
           this.testResults = result;
         }
       );
+
       this.GET_GESTURES_BY_CATEGORIES().then(() => {
         this.completed(this.GESTURES_BY_CATEGORIES);
       });
     } else {
       this.$router.push("/login");
     }
+  },
+  watch: {
+    redirect() {
+      if (this.redirect) {
+        window.location.href = "/";
+      }
+    },
   },
 };
 </script>

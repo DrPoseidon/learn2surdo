@@ -14,6 +14,7 @@
           :category="$route.params.category"
           :fileName="gesture.fileName"
           :class="$style.media"
+          :width="getWidth"
         />
         <router-link
           :to="`/gesture/${$route.params.category}/${getForwardID}`"
@@ -41,7 +42,10 @@ export default {
     L2SMedia,
   },
   computed: {
-    ...mapGetters(["GESTURES", "USER_ID"]),
+    ...mapGetters(["GESTURES", "USER_ID", "DEVICE"]),
+    getWidth() {
+      return this.DEVICE === "pc" ? "20vw" : "40vw";
+    },
     gesture() {
       const { category, id } = this.$route.params;
       let gesture;

@@ -3,10 +3,19 @@
     <L2SHeader />
     <div :class="$style.choose" v-if="chooseVisibility">
       <div>
+        <p v-if="getProgress(categoryName(index)) === 'completed'">
+          Вы уже завершили эту категорию
+        </p>
         <b-button variant="warning" @click="chooseVisibility = false"
           >Назад</b-button
         >
-        <b-button variant="primary" @click="cont()">Продолжить</b-button>
+        <b-button
+          variant="primary"
+          @click="cont()"
+          v-if="getProgress(categoryName(index)) !== 'completed'"
+          >Продолжить</b-button
+        >
+
         <b-button variant="danger" @click="reset()">Начать сначала</b-button>
       </div>
     </div>

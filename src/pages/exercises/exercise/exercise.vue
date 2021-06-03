@@ -3,7 +3,9 @@
     <L2SHeader />
     <L2SProgressBar :percent="getWidth" />
     <div :class="$style.message" v-if="getWidth === 100">
-      Вы завершили это категорию
+      Вы завершили эту категорию<br />Желаете начать сначала?
+      <b-button variant="success" @click="reset()">Да</b-button>
+      <b-button variant="danger" @click="redirect()">Нет</b-button>
     </div>
     <div :class="$style.main">
       <div v-if="curGestures.length < 3">
@@ -71,6 +73,17 @@ export default {
       "GET_PROGRESS",
       "SET_GESTURE_PROGRESS",
     ]),
+    reset() {
+      this.SET_PROGRESS({
+        userID: localStorage.getItem("userID"),
+        category: this.$route.params.category,
+        beginIndex: 0,
+      });
+      window.location.href = `/exercise/${this.$route.params.category}`;
+    },
+    redirect() {
+      window.location.href = "/";
+    },
     nextPack() {
       const sendToProgress = [];
       [...this.curGestures].forEach((el) => {

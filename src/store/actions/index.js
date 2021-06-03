@@ -1,5 +1,5 @@
-// export const uri = "http://localhost:3000/";
-export const uri = "https://api.drposeidon.ru/";
+export const uri = "http://localhost:3000/";
+// export const uri = "https://api.drposeidon.ru/";
 import { ADD_GESTURES_TO_DB, ADD_CATEGORIES_TO_DB } from "./addActions";
 import {
   DELETE_GESTURE_FROM_DB,
