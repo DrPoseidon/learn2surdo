@@ -2,6 +2,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 1299px) {
+    .correct,
+    .error {
+      width: 80vw;
+    }
+  }
+  @media (min-width: 1300px) {
+    .correct,
+    .error {
+      width: 40vw;
+    }
+  }
   .correct {
     color: green;
     background-color: white;
@@ -17,7 +30,6 @@
     border: 2px solid red;
     font-size: 20px;
     padding: 5px;
-    width: 300px;
   }
   .comp {
     display: flex;
