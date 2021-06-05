@@ -7,7 +7,7 @@
           <a href="/theory">Глоссарий</a>
           <a href="/">Упражнения</a>
           <a href="/test">Тестирование</a>
-          <a href="/personalProgress">Прогресс</a>
+          <a href="/personalProgress" v-if="progress">Прогресс</a>
         </div>
         <div :class="$style.login">
           <b-button variant="danger" @click="quit">Выйти</b-button>
@@ -39,7 +39,7 @@
               <a href="/theory">Глоссарий</a>
               <a href="/">Упражнения</a>
               <a href="/test">Тестирование</a>
-              <a href="/personalProgress">Прогресс</a>
+              <a href="/personalProgress" v-if="progress">Прогресс</a>
               <a @click="quit" :class="$style.quit">Выйти</a>
             </div>
           </div>
@@ -49,15 +49,17 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   title: "L2SHeader",
   data() {
     return {
       showList: false,
+      progress: true,
     };
   },
   methods: {
+    ...mapActions(["GET_TEST_RESULTS", "GET_PROGRESS"]),
     quit() {
       localStorage.removeItem("userID");
       localStorage.removeItem("login");
@@ -69,6 +71,23 @@ export default {
     login() {
       return localStorage.getItem("login");
     },
+  },
+  created() {
+    this.GET_TEST_RESULTS({ userID: localStorage.getItem("userID") }).then(
+      (testresult) => {
+        this.testResults = testresult;
+        this.GET_PROGRESS({ userID: localStorage.getItem("userID") }).then(
+          (progressresult) => {
+            if (
+              !testresult.length &&
+              (!progressresult || progressresult.beginIndex === 0)
+            ) {
+              this.progress = false;
+            }
+          }
+        );
+      }
+    );
   },
 };
 </script>

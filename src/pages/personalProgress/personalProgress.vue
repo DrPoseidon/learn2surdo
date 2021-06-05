@@ -122,8 +122,18 @@ export default {
   created() {
     if (localStorage.getItem("userID")) {
       this.GET_TEST_RESULTS({ userID: localStorage.getItem("userID") }).then(
-        (result) => {
-          this.testResults = result;
+        (testresult) => {
+          this.testResults = testresult;
+          this.GET_PROGRESS({ userID: localStorage.getItem("userID") }).then(
+            (progressresult) => {
+              if (
+                !testresult.length &&
+                (!progressresult || progressresult.beginIndex === 0)
+              ) {
+                window.location.href = "/";
+              }
+            }
+          );
         }
       );
 
