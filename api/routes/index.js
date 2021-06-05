@@ -1,4 +1,5 @@
-const router = require("express").Router();
+const express = require("express");
+const app = express();
 const {
   Gestures,
   Categories,
@@ -8,11 +9,11 @@ const {
   TestResults,
 } = require("./db");
 
-router.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Learn2Surdo API");
 });
 
-router.post("/add-gesture", async (req, res) => {
+app.post("/add-gesture", async (req, res) => {
   const { title, description, category } = req.body;
 
   await Gestures.find({ title })
@@ -38,7 +39,7 @@ router.post("/add-gesture", async (req, res) => {
     });
 });
 
-router.post("/add-multiple-gestures", async (req, res) => {
+app.post("/add-multiple-gestures", async (req, res) => {
   let arr = [];
   req.body.forEach((el) => {
     arr.push(el.title);
@@ -60,7 +61,7 @@ router.post("/add-multiple-gestures", async (req, res) => {
     });
 });
 
-router.post("/add-multiple-categories", async (req, res) => {
+app.post("/add-multiple-categories", async (req, res) => {
   let arr = [];
   req.body.forEach((el) => {
     arr.push(el.title);
@@ -82,7 +83,7 @@ router.post("/add-multiple-categories", async (req, res) => {
     });
 });
 
-router.get("/all-gestures", async (req, res) => {
+app.get("/all-gestures", async (req, res) => {
   await Gestures.find()
     .then((result) => {
       res.send(result);
@@ -92,7 +93,7 @@ router.get("/all-gestures", async (req, res) => {
     });
 });
 
-router.post("/gesture", async (req, res) => {
+app.post("/gesture", async (req, res) => {
   const { category } = req.body;
   await Gestures.find({ category })
     .then((result) => {
@@ -103,7 +104,7 @@ router.post("/gesture", async (req, res) => {
     });
 });
 
-router.get("/get-categories", async (req, res) => {
+app.get("/get-categories", async (req, res) => {
   await Categories.find()
     .then((result) => {
       res.send(result);
@@ -113,7 +114,7 @@ router.get("/get-categories", async (req, res) => {
     });
 });
 
-router.post("/delete-gesture", async (req, res) => {
+app.post("/delete-gesture", async (req, res) => {
   const { id } = req.body;
   await Gestures.deleteOne({ _id: id })
     .then((result) => {
@@ -124,7 +125,7 @@ router.post("/delete-gesture", async (req, res) => {
     });
 });
 
-router.post("/refresh-gesture-information", async (req, res) => {
+app.post("/refresh-gesture-information", async (req, res) => {
   const { _id, title, description, fileName } = req.body;
   if (fileName) {
     await Gestures.updateOne({ _id }, { title, description, fileName })
@@ -145,7 +146,7 @@ router.post("/refresh-gesture-information", async (req, res) => {
   }
 });
 
-router.post("/resfresh-category-information", async (req, res) => {
+app.post("/resfresh-category-information", async (req, res) => {
   const { _id, title } = req.body;
   await Categories.updateOne({ _id }, { title })
     .then((result) => {
@@ -154,7 +155,7 @@ router.post("/resfresh-category-information", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/delete-category", async (req, res) => {
+app.post("/delete-category", async (req, res) => {
   const { _id } = req.body;
   await Categories.deleteOne({ _id })
     .then((result) => {
@@ -165,7 +166,7 @@ router.post("/delete-category", async (req, res) => {
     });
 });
 
-router.post("/register", async (req, res) => {
+app.post("/register", async (req, res) => {
   await Users.findOne({ login: req.body.login }).then((result) => {
     if (!result) {
       Users.create(req.body)
@@ -187,7 +188,7 @@ router.post("/register", async (req, res) => {
   });
 });
 
-router.post("/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   try {
     const user = await Users.findOne(req.body);
     if (user) {
@@ -200,7 +201,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/get-progress", async (req, res) => {
+app.post("/get-progress", async (req, res) => {
   try {
     const progress = await Progress.findOne(req.body);
     res.send(progress);
@@ -209,7 +210,7 @@ router.post("/get-progress", async (req, res) => {
   }
 });
 
-router.post("/set-progress", async (req, res) => {
+app.post("/set-progress", async (req, res) => {
   try {
     const progress = await Progress.findOne({
       userID: req.body.userID,
@@ -229,7 +230,7 @@ router.post("/set-progress", async (req, res) => {
   }
 });
 
-router.post("/add-gesture-progress", async (req, res) => {
+app.post("/add-gesture-progress", async (req, res) => {
   await GestureProgress.insertMany(req.body)
     .then(() => {
       res.sendStatus(201);
@@ -239,7 +240,7 @@ router.post("/add-gesture-progress", async (req, res) => {
     });
 });
 
-router.post("/get-gesture-progress", async (req, res) => {
+app.post("/get-gesture-progress", async (req, res) => {
   await GestureProgress.find(req.body)
     .then((result) => {
       res.send(result);
@@ -249,7 +250,7 @@ router.post("/get-gesture-progress", async (req, res) => {
     });
 });
 
-router.post("/set-test-result", async (req, res) => {
+app.post("/set-test-result", async (req, res) => {
   await TestResults.create(req.body)
     .then(() => {
       res.sendStatus(201);
@@ -259,7 +260,7 @@ router.post("/set-test-result", async (req, res) => {
     });
 });
 
-router.post("/get-test-results", async (req, res) => {
+app.post("/get-test-results", async (req, res) => {
   await TestResults.find(req.body)
     .then((result) => {
       res.send(result);
@@ -269,4 +270,4 @@ router.post("/get-test-results", async (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = app;
