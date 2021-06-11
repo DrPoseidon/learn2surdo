@@ -11,7 +11,8 @@
         </div>
         <div :class="$style.login">
           <b-button variant="danger" @click="quit">Выйти</b-button>
-          <p>{{ login }}</p>
+          <p v-if="!role" :class="$style.loginText">{{ login }}</p>
+          <a v-else :class="$style.adminPanel" href="/admin">ADMIN</a>
         </div>
       </div>
 
@@ -56,6 +57,7 @@ export default {
     return {
       showList: false,
       progress: true,
+      role: false,
     };
   },
   methods: {
@@ -73,6 +75,7 @@ export default {
     },
   },
   created() {
+    this.role = JSON.parse(localStorage.getItem("role"));
     this.GET_TEST_RESULTS({ userID: localStorage.getItem("userID") }).then(
       (testresult) => {
         this.testResults = testresult;
