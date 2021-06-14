@@ -122,6 +122,7 @@ export default {
               this.error = false;
               this.changeMessage("Категории успешно добавлены!");
               this.GET_ALL_CATEGORIES_FROM_DB();
+              this.categories = [{ title: "" }];
             } else {
               this.changeMessage(result.data);
               this.error = true;

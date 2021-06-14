@@ -16,6 +16,7 @@ Vue.use(VueRouter);
 export default new VueRouter({
   mode: "history",
   routes: [
+    { path: "*", redirect: "/" },
     { path: "/", component: exercises },
     { path: "/gesture/:category/:id", component: gesture },
     { path: "/theory", component: gestures },
