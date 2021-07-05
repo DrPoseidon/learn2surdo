@@ -1,13 +1,16 @@
 <template>
   <div class="root">
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <L2SHeader v-if="$route.path !== '/login' && $route.path !== '/register'" />
+    <router-view />
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import L2SHeader from "Components/L2SHeader";
 export default {
+  components: {
+    L2SHeader,
+  },
   computed: {
     ...mapGetters(["DEVICE"]),
   },
@@ -26,10 +29,15 @@ export default {
   },
 };
 </script>
-<style lang="scss" module>
+<style lang="scss">
 * {
   margin: 0;
   padding: 0;
   background-color: rgb(85, 197, 255);
+}
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

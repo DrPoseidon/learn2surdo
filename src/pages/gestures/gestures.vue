@@ -1,29 +1,25 @@
 <template>
   <div :class="$style.root">
-    <L2SHeader />
-    <div :class="$style.main">
-      <div v-for="(category, index) in GESTURES_BY_CATEGORIES" :key="index">
-        <div v-if="category.length">
-          <b-button :class="$style.btn" @click="visibility(index)">
-            {{
-              categoryName(index)[0].toUpperCase() +
-                categoryName(index).slice(1)
-            }}</b-button
+    <div v-for="(category, index) in GESTURES_BY_CATEGORIES" :key="index">
+      <div v-if="category.length">
+        <b-button :class="$style.btn" @click="visibility(index)">
+          {{
+            categoryName(index)[0].toUpperCase() + categoryName(index).slice(1)
+          }}</b-button
+        >
+        <div v-if="checkVisibility(index)" :class="$style.gestures">
+          <router-link
+            :to="`/gesture/${categoryName(index)}/${gesture._id}`"
+            v-for="gesture in category"
+            :key="gesture._id"
+            :class="$style.gesture"
           >
-          <div v-if="checkVisibility(index)" :class="$style.gestures">
-            <a
-              :href="`/gesture/${categoryName(index)}/${gesture._id}`"
-              v-for="gesture in category"
-              :key="gesture._id"
-              :class="$style.gesture"
-            >
-              {{ gesture.title }}
-              <img
-                :src="require(`PublicStatuses/completed.png`)"
-                v-if="getProgress(gesture._id, gesture.category)"
-              />
-            </a>
-          </div>
+            {{ gesture.title }}
+            <img
+              :src="require(`PublicStatuses/completed.png`)"
+              v-if="getProgress(gesture._id, gesture.category)"
+            />
+          </router-link>
         </div>
       </div>
     </div>
@@ -31,12 +27,9 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import L2SHeader from "Components/L2SHeader";
 export default {
   name: "L2SGestures",
-  components: {
-    L2SHeader,
-  },
+
   data() {
     return {
       visibilityArray: [],

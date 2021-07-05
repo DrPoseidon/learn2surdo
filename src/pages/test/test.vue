@@ -1,21 +1,16 @@
 <template>
   <div :class="$style.root">
-    <L2SHeader />
-
-    <div :class="$style.main">
-      <Exercises
-        v-if="gestures && !check"
-        :gestures="gestures"
-        :exercises="exercises"
-        :allGestures="GESTURES"
-        @goToCheck="goToCheck"
-      />
-      <CheckResults v-if="check" :answers="answers" />
-    </div>
+    <Exercises
+      v-if="gestures && !check"
+      :gestures="gestures"
+      :exercises="exercises"
+      :allGestures="GESTURES"
+      @goToCheck="goToCheck"
+    />
+    <CheckResults v-if="check" :answers="answers" />
   </div>
 </template>
 <script>
-import L2SHeader from "Components/L2SHeader";
 import { mapActions, mapGetters } from "vuex";
 import CheckResults from "./CheckResults";
 
@@ -23,7 +18,6 @@ import Exercises from "./Exercises";
 export default {
   name: "test",
   components: {
-    L2SHeader,
     Exercises,
     CheckResults,
   },

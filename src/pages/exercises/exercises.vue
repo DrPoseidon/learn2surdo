@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.root">
-    <L2SHeader />
     <div :class="$style.choose" v-if="chooseVisibility">
       <div>
         <p v-if="getProgress(categoryName(index)) === 'completed'">
@@ -78,13 +77,9 @@
   </div>
 </template>
 <script>
-import L2SHeader from "Components/L2SHeader";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "exercises",
-  components: {
-    L2SHeader,
-  },
   data() {
     return {
       chooseVisibility: false,
@@ -104,7 +99,8 @@ export default {
       return this.CATEGORIES[index].title;
     },
     cont() {
-      window.location.href = `/exercise/${this.categoryName(this.index)}`;
+      // window.location.href = `/exercise/${this.categoryName(this.index)}`;
+      this.$router.push(`/exercise/${this.categoryName(this.index)}`);
     },
     reset() {
       this.SET_PROGRESS({
@@ -112,7 +108,8 @@ export default {
         category: this.categoryName(this.index),
         beginIndex: 0,
       });
-      window.location.href = `/exercise/${this.categoryName(this.index)}`;
+      // window.location.href = `/exercise/${this.categoryName(this.index)}`;
+      this.$router.push(`/exercise/${this.categoryName(this.index)}`);
     },
     check(index) {
       this.GET_PROGRESS({

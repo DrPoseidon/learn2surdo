@@ -45,7 +45,9 @@
       <b-button variant="success" @click="register"
         >Зарегистрироваться</b-button
       >
-      <p>У вас уже есть аккаунт? <a href="/login">Войти</a></p>
+      <p>
+        У вас уже есть аккаунт? <router-link to="/login">Войти</router-link>
+      </p>
     </div>
   </div>
 </template>
@@ -115,7 +117,8 @@ export default {
             }, 1000);
           }
           if (result === "redirectToHome") {
-            window.location.href = "/";
+            // window.location.href = "/";
+            this.$router.push("/");
           }
         });
       }

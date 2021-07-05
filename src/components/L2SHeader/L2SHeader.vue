@@ -1,18 +1,30 @@
 <template>
   <div :class="$style.root">
-    <a href="/"><h2>Learn2Surdo</h2></a>
+    <router-link to="/"><h2>Learn2Surdo</h2></router-link>
     <div :class="$style.headers">
       <div :class="$style.bigHeader" v-if="DEVICE === 'pc'">
         <div :class="$style.links">
-          <a href="/theory">Глоссарий</a>
-          <a href="/">Упражнения</a>
-          <a href="/test">Тестирование</a>
-          <a href="/personalProgress" v-if="progress">Прогресс</a>
+          <router-link to="/theory" v-if="$route.path !== '/theory'"
+            >Глоссарий</router-link
+          >
+          <router-link to="/" v-if="$route.path !== '/'"
+            >Упражнения</router-link
+          >
+          <router-link to="/test" v-if="$route.path !== '/test'"
+            >Тестирование</router-link
+          >
+          <router-link
+            to="/personalProgress"
+            v-if="progress && $route.path !== '/personalProgress'"
+            >Прогресс</router-link
+          >
         </div>
         <div :class="$style.login">
           <b-button variant="danger" @click="quit">Выйти</b-button>
           <p v-if="!role" :class="$style.loginText">{{ login }}</p>
-          <a v-else :class="$style.adminPanel" href="/admin">ADMIN</a>
+          <router-link v-else :class="$style.adminPanel" to="/admin"
+            >ADMIN</router-link
+          >
         </div>
       </div>
 
@@ -37,10 +49,20 @@
               />
             </div>
             <div :class="$style.aa">
-              <a href="/theory">Глоссарий</a>
-              <a href="/">Упражнения</a>
-              <a href="/test">Тестирование</a>
-              <a href="/personalProgress" v-if="progress">Прогресс</a>
+              <a @click="redirect('/theory')" v-if="$route.path !== '/theory'"
+                >Глоссарий</a
+              >
+              <a @click="redirect('/')" v-if="$route.path !== '/'"
+                >Упражнения</a
+              >
+              <a @click="redirect('/test')" v-if="$route.path !== '/test'"
+                >Тестирование</a
+              >
+              <a
+                v-if="progress && $route.path !== '/personalProgress'"
+                @click="redirect('/personalProgress')"
+                >Прогресс</a
+              >
               <a @click="quit" :class="$style.quit">Выйти</a>
             </div>
           </div>
@@ -56,7 +78,7 @@ export default {
   data() {
     return {
       showList: false,
-      progress: true,
+      progress: false,
       role: false,
     };
   },
@@ -66,6 +88,12 @@ export default {
       localStorage.removeItem("userID");
       localStorage.removeItem("login");
       this.$router.push("/login");
+    },
+    redirect(url) {
+      this.showList = !this.showList;
+      setTimeout(() => {
+        this.$router.push(url);
+      }, 300);
     },
   },
   computed: {
@@ -82,10 +110,10 @@ export default {
         this.GET_PROGRESS({ userID: localStorage.getItem("userID") }).then(
           (progressresult) => {
             if (
-              !testresult.length &&
-              (!progressresult || progressresult.beginIndex === 0)
+              testresult.length &&
+              (progressresult || progressresult.beginIndex !== 0)
             ) {
-              this.progress = false;
+              this.progress = true;
             }
           }
         );

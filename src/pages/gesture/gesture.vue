@@ -1,44 +1,39 @@
 <template>
   <div :class="$style.root">
-    <L2SHeader />
-    <div :class="$style.main">
-      <div :class="$style.mediaBlock">
-        <router-link
-          :to="`/gesture/${$route.params.category}/${getBackID}`"
-          v-if="getBackID !== undefined"
-          :class="$style.back"
-        >
-          <b-button variant="primary">Назад</b-button>
-        </router-link>
-        <L2SMedia
-          :category="$route.params.category"
-          :fileName="gesture.fileName"
-          :class="$style.media"
-          :width="getWidth"
-        />
-        <router-link
-          :to="`/gesture/${$route.params.category}/${getForwardID}`"
-          v-if="getForwardID !== undefined"
-          :class="$style.forward"
-        >
-          <b-button variant="primary">Вперед</b-button>
-        </router-link>
-      </div>
-      <div :class="$style.title">{{ gesture.title }}</div>
-      <div :class="$style.description">
-        {{ gesture.description }}
-      </div>
+    <div :class="$style.mediaBlock">
+      <router-link
+        :to="`/gesture/${$route.params.category}/${getBackID}`"
+        v-if="getBackID !== undefined"
+        :class="$style.back"
+      >
+        <b-button variant="primary">Назад</b-button>
+      </router-link>
+      <L2SMedia
+        :category="$route.params.category"
+        :fileName="gesture.fileName"
+        :class="$style.media"
+        :width="getWidth"
+      />
+      <router-link
+        :to="`/gesture/${$route.params.category}/${getForwardID}`"
+        v-if="getForwardID !== undefined"
+        :class="$style.forward"
+      >
+        <b-button variant="primary">Вперед</b-button>
+      </router-link>
+    </div>
+    <div :class="$style.title">{{ gesture.title }}</div>
+    <div :class="$style.description">
+      {{ gesture.description }}
     </div>
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import L2SHeader from "Components/L2SHeader";
 import L2SMedia from "Components/L2SMedia";
 export default {
   name: "gesture",
   components: {
-    L2SHeader,
     L2SMedia,
   },
   computed: {

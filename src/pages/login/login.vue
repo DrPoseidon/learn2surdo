@@ -19,7 +19,10 @@
         {{ message }}
       </b-form-invalid-feedback>
       <b-button variant="success" @click="register">Войти</b-button>
-      <p>У вас нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+      <p>
+        У вас нет аккаунта?
+        <router-link to="/register">Зарегистрироваться</router-link>
+      </p>
     </div>
   </div>
 </template>
@@ -56,7 +59,8 @@ export default {
           password: crypto.MD5(password).toString(),
         }).then((result) => {
           if (result === "redirectToHome") {
-            window.location.href = "/";
+            // window.location.href = "/";
+            this.$router.push("/");
           } else {
             this.loginState = false;
             this.passwordState = false;

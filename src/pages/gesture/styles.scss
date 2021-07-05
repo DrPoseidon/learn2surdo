@@ -2,47 +2,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .main {
+  margin-top: 20px;
+  .mediaBlock {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    margin-top: 20px;
-    .mediaBlock {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      position: relative;
-      .media {
-        margin: 0 20px;
-      }
-      .forward {
-        position: absolute;
-        right: -70px;
-      }
-      .back {
-        position: absolute;
-        left: -70px;
-      }
-      .forward,
-      .back {
-        button {
-          width: 80px;
-        }
+    position: relative;
+    .media {
+      margin: 0 20px;
+    }
+    .forward {
+      position: absolute;
+      right: -70px;
+    }
+    .back {
+      position: absolute;
+      left: -70px;
+    }
+    .forward,
+    .back {
+      button {
+        width: 80px;
       }
     }
-    .title {
-      font-weight: 600;
-      font-size: 25px;
-      color: white;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 25px;
+    color: white;
+  }
+  .description {
+    color: white;
+    font-size: 20px;
+    width: 80vw;
+    @media (min-width: 1300px) {
+      width: 40vw;
     }
-    .description {
-      color: white;
-      font-size: 20px;
-      width: 80vw;
-      @media (min-width: 1300px) {
-        width: 40vw;
-      }
-      text-align: center;
-    }
+    text-align: center;
   }
 }

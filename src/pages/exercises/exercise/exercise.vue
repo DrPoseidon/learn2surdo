@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.root">
-    <L2SHeader />
     <L2SProgressBar :percent="getWidth" />
     <div :class="$style.message" v-if="getWidth === 100">
       Вы завершили эту категорию<br />Желаете начать сначала?
@@ -47,14 +46,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import L2STheory from "./L2STheory";
-import L2SHeader from "Components/L2SHeader";
 import L2SExercise from "./L2SExercise";
 import L2SProgressBar from "./L2SProgressBar";
 export default {
   name: "exercise",
   components: {
     L2STheory,
-    L2SHeader,
     L2SExercise,
     L2SProgressBar,
   },
@@ -79,10 +76,12 @@ export default {
         category: this.$route.params.category,
         beginIndex: 0,
       });
-      window.location.href = `/exercise/${this.$route.params.category}`;
+      // window.location.href = `/exercise/${this.$route.params.category}`;
+      this.$router.push(`/exercise/${this.$route.params.category}`);
     },
     redirect() {
-      window.location.href = "/";
+      // window.location.href = "/";
+      this.$router.push("/");
     },
     nextPack() {
       const sendToProgress = [];
@@ -171,6 +170,7 @@ export default {
         userID: localStorage.getItem("userID"),
         category: this.$route.params.category,
       }).then((result) => {
+        console.log(result);
         if (!result) {
           this.SET_PROGRESS({
             userID: localStorage.getItem("userID"),

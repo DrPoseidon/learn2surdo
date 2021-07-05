@@ -1,60 +1,51 @@
 <template>
   <div :class="$style.root">
-    <L2SHeader />
-    <div :class="$style.main">
-      <div :class="$style.categoriesProgress" v-if="progress.length">
-        <h2>Прогресс категорий</h2>
+    <div :class="$style.categoriesProgress" v-if="progress.length">
+      <h2>Прогресс категорий</h2>
+      <div
+        v-for="(category, index) in progress"
+        :key="index"
+        :class="$style.res"
+      >
         <div
-          v-for="(category, index) in progress"
-          :key="index"
-          :class="$style.res"
-        >
-          <div
-            :class="$style.progressBar"
-            :style="{ width: `${category.percent}%` }"
-          ></div>
-          <p :class="$style.category" v-if="category.progress">
-            {{ category.category }}
-          </p>
-          <p :class="$style.progress" v-if="category.progress">
-            {{ category.progress }}
-          </p>
-        </div>
+          :class="$style.progressBar"
+          :style="{ width: `${category.percent}%` }"
+        ></div>
+        <p :class="$style.category" v-if="category.progress">
+          {{ category.category }}
+        </p>
+        <p :class="$style.progress" v-if="category.progress">
+          {{ category.progress }}
+        </p>
       </div>
-      <div :class="$style.testResults" v-if="testResults.length">
-        <h2>Результаты тестов</h2>
-        <router-link
-          :to="`/testResult/${result._id}`"
-          v-for="result in testResults"
-          :key="result._d"
-          :class="[$style.res, $style.test]"
-        >
-          <div
-            :class="$style.progressBar"
-            :style="{
-              width: `${Math.round((getAVG(result) * 100) / 10)}%`,
-              backgroundColor: getColor(
-                Math.round((getAVG(result) * 100) / 10)
-              ),
-            }"
-          ></div>
-          <p :class="$style.category">
-            {{ getRusDate(result.createdAt.slice(0, 10)) }}
-          </p>
-          <p :class="$style.progress">{{ getAVG(result) }}/10</p>
-        </router-link>
-      </div>
+    </div>
+    <div :class="$style.testResults" v-if="testResults.length">
+      <h2>Результаты тестов</h2>
+      <router-link
+        :to="`/testResult/${result._id}`"
+        v-for="result in testResults"
+        :key="result._d"
+        :class="[$style.res, $style.test]"
+      >
+        <div
+          :class="$style.progressBar"
+          :style="{
+            width: `${Math.round((getAVG(result) * 100) / 10)}%`,
+            backgroundColor: getColor(Math.round((getAVG(result) * 100) / 10)),
+          }"
+        ></div>
+        <p :class="$style.category">
+          {{ getRusDate(result.createdAt.slice(0, 10)) }}
+        </p>
+        <p :class="$style.progress">{{ getAVG(result) }}/10</p>
+      </router-link>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import L2SHeader from "Components/L2SHeader";
 export default {
   name: "personalProgress",
-  components: {
-    L2SHeader,
-  },
   data() {
     return {
       testResults: [],
@@ -130,7 +121,8 @@ export default {
                 !testresult.length &&
                 (!progressresult || progressresult.beginIndex === 0)
               ) {
-                window.location.href = "/";
+                // window.location.href = "/";
+                this.$router.push("/");
               }
             }
           );
@@ -147,7 +139,8 @@ export default {
   watch: {
     redirect() {
       if (this.redirect) {
-        window.location.href = "/";
+        // window.location.href = "/";
+        this.$router.push("/");
       }
     },
   },
